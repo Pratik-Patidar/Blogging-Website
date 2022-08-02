@@ -1,0 +1,67 @@
+{% extends "layout.html" %}
+{% block body %}
+        <!-- Page Header-->
+        <header class="masthead" style="background-image: url('    {{ url_for('static',filename='assets/img/home-bg.jpg') }}     ')">
+            <div class="container position-relative px-4 px-lg-5">
+                <div class="row gx-4 gx-lg-5 justify-content-center">
+                    <div class="col-md-10 col-lg-8 col-xl-7">
+                        <div class="site-heading">
+                            <h1>Admin Panel</h1>
+                            <span class="subheading">Manage Your Blogs And Post</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <!-- Main Content-->
+        <div class="container px-4 px-lg-5">
+            <div class="row gx-4 gx-lg-5 justify-content-center">
+                <div class="col-md-10 col-lg-8 col-xl-7">
+                    <!-- Post preview-->
+                    <div class="container">
+                     <h1>Basic Action</h1>  
+                    <a class="btn btn-sm btn-outline-warning text-uppercase" href="/edit/0">Add Post</a>
+                    <a class="btn btn-sm btn-outline-danger text-uppercase" href="/logout">Logout</a>
+                    <hr>
+                    <h2>Upload A file</h2>
+                    <form action="/uploader" method="post" enctype="multipart/form-data">
+                      <input class="form-control" type="file" name="file1" id="forfile">
+                      <button type="submit" class="btn btn-outline-success btn-sm  text-uppercase">Submit</button>
+                    </form>
+                    </div>
+                     <div class="container">
+                      <h1>Add/Edit Blogs</h1> 
+                      <hr>         
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                  <th>Sno</th>
+                                  <th>Title</th>
+                                  <th>Date</th>
+                                  <th>Edit</th>
+                                  <th>Delete</th>
+                                </tr>
+                              </thead>
+                        {% for post in posts %}
+                          <tbody>
+                            <tr>
+                              <td>{{post.sno}}</td>
+                              <td>{{post.title}}</td>                              
+                              <td>{{post.date}}</td>
+                              <td><a href="/edit/{{post.sno}}"><button class="btn btn-outline-primary btn-sm text-uppercase">Edit</button></a></td>
+                              <td><a href="/delete/{{post.sno}}"><button class="btn btn-outline-primary btn-sm  text-uppercase">Delete</button></a><td>
+                            </tr>
+                          </tbody>
+                        {% endfor %}  
+                        </table>
+                      </div>
+
+                    <!-- Divider-->
+                    <hr class="my-4" />
+                    <!-- Pager-->
+                    <div class="d-flex justify-content-end mb-4"><a class="btn btn-primary text-uppercase" href="#!">Older Posts →</a></div>
+                </div>
+            </div>
+        </div>
+
+{% endblock %}
